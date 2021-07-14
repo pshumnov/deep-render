@@ -1,6 +1,6 @@
 import h5py
 import os
-from load_camera import load_camera, get_frames
+from load_scenes.load_camera import load_camera, get_frames
 from progress.bar import IncrementalBar
 
 def process_scene(channels, scenepath):

@@ -1,9 +1,9 @@
 import os
 import argparse
 
-from dataset_download_images import download, urls_qty
-from channel_loaders import Color512Loader, Albedo512Loader, Depth512Loader, Normals512Loader
-from process_scene import process_scene, save_scene
+from load_scenes.dataset_download_images import download
+from load_scenes.process_scene import process_scene, save_scene
+from channels.channel_loaders import Color512Loader, Albedo512Loader, Depth512Loader, Normals512Loader
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--download_dir", required=True)

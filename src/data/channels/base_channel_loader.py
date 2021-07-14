@@ -1,8 +1,11 @@
 import numpy as np
+import h5py
+import os
 
 class BaseChannelLoader:
-    def __init__(self, name, width, height, dim):
+    def __init__(self, name, directory, width, height, dim):
         self.name = name
+        self.directory = directory
 
         self.width = width
         self.height = height
@@ -25,6 +28,14 @@ class BaseChannelLoader:
         self.data[self.index] = elem
         self.index += 1
 
-    def load_frame(self, imgpath, frame):
+    def load_frame(self, imgpath, cam, frame):
+        file = h5py.File(os.path.join(imgpath, 
+                            "scene_cam_{:02d}_{:s}_hdf5".format(cam, self.directory),
+                            "frame.{:04d}.{:s}.hdf5".format(frame, self.name)), "r")
+
+        processed = self.process_frame(file["dataset"][()])
+        self.add_elem(processed)
+
+    def process_frame(self, arr):
         pass
         
