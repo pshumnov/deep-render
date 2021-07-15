@@ -9,8 +9,7 @@ def load_scene_frames(channels, scenepath, frames_qty):
     bar = IncrementalBar('Processing scene', max=frames_qty)
 
     frames = get_frames(scenepath, 0)
-    frames = frames[:frames_qty]
-    load_camera(channels, scenepath, 0, frames, bar)
+    load_camera(channels, scenepath, 0, frames, bar, frames_qty)
 
     bar.finish()
 

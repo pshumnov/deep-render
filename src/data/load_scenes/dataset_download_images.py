@@ -15,7 +15,7 @@ def download(num, downloads_dir, decompress_dir):
     assert retval == 0
 
     # Decompress
-    cmd = "unzip " + download_file + " -d " + decompress_dir
+    cmd = "unzip " + download_file + " -d " + decompress_dir + " -qq"
     # cmd = "\"C:\\Program Files\\WinRAR\\winrar.exe\" x " + download_file + " *.* " + decompress_dir
     print("")
     print(cmd)

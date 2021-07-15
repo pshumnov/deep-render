@@ -14,7 +14,7 @@ class BaseChannelLoader:
         self.clear()
 
     def clear(self):
-        self.index = 0
+        self.size = 0
         self.data = np.zeros((0, self.height, self.width, self.dim))
 
     def extend(self, qty):
@@ -22,19 +22,26 @@ class BaseChannelLoader:
                         self.height, self.width, self.dim)
 
     def sync_size(self):
-        self.extend(self.index + 1 - self.data.shape[0])
+        self.extend(self.size - self.data.shape[0])
 
     def add_elem(self, elem):
-        self.data[self.index] = elem
-        self.index += 1
+        self.data[self.size] = elem
+        self.size += 1
 
     def load_frame(self, imgpath, cam, frame):
         file = h5py.File(os.path.join(imgpath, 
                             "scene_cam_{:02d}_{:s}_hdf5".format(cam, self.directory),
                             "frame.{:04d}.{:s}.hdf5".format(frame, self.name)), "r")
 
-        processed = self.process_frame(file["dataset"][()])
-        self.add_elem(processed)
+        dset = file["dataset"][()]
+
+        if np.isnan(np.amax(dset)):
+            return False 
+        else:
+            processed = self.process_frame(dset)
+            self.add_elem(processed)
+
+            return True
 
     def process_frame(self, arr):
         pass
