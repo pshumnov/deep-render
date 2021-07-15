@@ -3,9 +3,20 @@ import os
 from load_scenes.load_camera import load_camera, get_frames
 from progress.bar import IncrementalBar
 
-def process_scene(channels, scenepath):
-    for c in channels: c.clear()
+def load_scene_frames(channels, scenepath, frames_qty):
+    for c in channels: c.extend(frames_qty)
+    
+    bar = IncrementalBar('Processing scene', max=frames_qty)
 
+    frames = get_frames(scenepath, 0)
+    frames = frames[:frames_qty]
+    load_camera(channels, scenepath, 0, frames, bar)
+
+    bar.finish()
+
+    for c in channels: c.sync_size()
+
+def load_scene(channels, scenepath):
     frames = []
     cams = 0
     while os.path.exists(os.path.join(scenepath, "_detail/cam_{:02}".format(cams))):
@@ -23,8 +34,3 @@ def process_scene(channels, scenepath):
     bar.finish()
 
     for c in channels: c.sync_size()
-
-def save_scene(channels, outfile):
-    with h5py.File(outfile + ".hdf5", "w") as f:
-        for c in channels: 
-            f.create_dataset(c.name, data=c.data, compression='gzip')

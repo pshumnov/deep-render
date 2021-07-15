@@ -45,7 +45,7 @@ class Normals512Loader(BaseChannelLoader):
     def __init__(self):
         BaseChannelLoader.__init__(self, "normal_bump_cam", "geometry", 512, 384, 3)
 
-    def process_frame(arr):
+    def process_frame(self, arr):
         arr = skimage.measure.block_reduce(arr, (2, 2, 1), np.mean)
 
         return arr

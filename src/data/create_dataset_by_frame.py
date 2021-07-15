@@ -4,6 +4,7 @@ import h5py
 from progress.bar import IncrementalBar
 
 from channels.channel_loaders import Color512Loader, Albedo512Loader, Depth512Loader, Normals512Loader
+from channels.save_channels import save_channels
 from load_frames.download import URLS
 
 
@@ -74,6 +75,4 @@ for channel in channels:
 
 bar.finish()
 
-with h5py.File(os.path.join(args.dataset_dir, "{:02d}_{:04d}.hdf5".format(camera, frame)), "w") as f:
-        for c in channels: 
-            f.create_dataset(c.name, data=c.data, compression='gzip')
+save_channels(channels, os.path.join(args.dataset_dir, "{:02d}_{:04d}.hdf5".format(camera, frame)))
