@@ -1,4 +1,4 @@
-from data.channels.dataset_loader import DatasetLoader
+from channels.dataset_loader import DatasetLoader
 import os
 import argparse
 
