@@ -3,19 +3,7 @@ import os
 from load_scenes.load_camera import load_camera, get_frames
 from progress.bar import IncrementalBar
 
-def load_scene_frames(channels, scenepath, frames_qty):
-    for c in channels: c.extend(frames_qty)
-    
-    bar = IncrementalBar('Processing scene', max=frames_qty)
-
-    frames = get_frames(scenepath, 0)
-    load_camera(channels, scenepath, 0, frames, bar, frames_qty)
-
-    bar.finish()
-
-    for c in channels: c.sync_size()
-
-def load_scene(channels, scenepath):
+def load_scene(loader, scenepath, frames_qty=None):
     frames = []
     cams = 0
     while os.path.exists(os.path.join(scenepath, "_detail/cam_{:02}".format(cams))):
@@ -23,13 +11,18 @@ def load_scene(channels, scenepath):
         cams += 1
 
     total = sum(map(lambda f: f.shape[0], frames))
-    for c in channels: c.extend(total)
+    if frames_qty and frames_qty < total:
+        total = frames_qty
+
+    loader.extend(total)
     
     bar = IncrementalBar('Processing scene', max=total)
 
     for cam in range(cams):
-        load_camera(channels, scenepath, cam, frames[cam], bar)
+        left = min(total - loader.size, frames[cam].shape[0])
+        load_camera(loader, scenepath, cam, frames[cam], bar, left)
+
+        if loader.size >= total:
+            break
 
     bar.finish()
-
-    for c in channels: c.sync_size()

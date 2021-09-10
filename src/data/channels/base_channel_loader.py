@@ -1,8 +1,9 @@
 import numpy as np
 import h5py
 import os
+from abc import ABC, abstractmethod
 
-class BaseChannelLoader:
+class BaseChannelLoader(ABC):
     def __init__(self, name, directory, width, height, dim):
         self.name = name
         self.directory = directory
@@ -10,6 +11,7 @@ class BaseChannelLoader:
         self.width = width
         self.height = height
         self.dim = dim
+        self.size = 0
 
         self.clear()
 
@@ -43,6 +45,7 @@ class BaseChannelLoader:
 
             return True
 
+    @abstractmethod
     def process_frame(self, arr):
         pass
         

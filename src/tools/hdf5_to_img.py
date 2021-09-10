@@ -22,7 +22,7 @@ except:
     print("Invalid file")
     quit()
 
-arr = np.clip(dset, 0, 1)
+arr = np.clip(dset, 0, 1).astype(np.float8)
 img = Image.fromarray((arr * 255).astype(np.uint8))
 
 if args.raw:

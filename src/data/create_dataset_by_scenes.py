@@ -1,10 +1,10 @@
+from data.channels.dataset_loader import DatasetLoader
 import os
 import argparse
 
 from load_scenes.dataset_download_images import download
-from load_scenes.load_scene import load_scene, load_scene_frames
+from load_scenes.load_scene import load_scene
 from channels.channel_loaders import Color512Loader, Albedo512Loader, Depth512Loader, Normals512Loader
-from channels.save_channels import save_channels
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--download_dir", required=True, help="Downloading directory")
@@ -25,22 +25,23 @@ if not os.path.exists(args.decompress_dir):
 if not os.path.exists(args.dataset_dir): 
     os.makedirs(args.dataset_dir)
 
-channels = [Color512Loader(), 
+loader = DatasetLoader([Color512Loader(), 
             Albedo512Loader(), 
             Depth512Loader(), 
-            Normals512Loader()]
+            Normals512Loader()])
 
 for i in range(args.start, args.stop):
     scene_name = download(i, args.download_dir, args.decompress_dir)
 
     if args.max_frames == -1:
-        load_scene(channels, os.path.join(args.decompress_dir, scene_name))
+        load_scene(loader, os.path.join(args.decompress_dir, scene_name))
     else:
-        load_scene_frames(channels, os.path.join(args.decompress_dir, scene_name), args.max_frames)
+        load_scene(loader, os.path.join(args.decompress_dir, scene_name), args.max_frames)
     
     if (i + 1) % args.buffer_size == 0:
-        save_channels(channels, os.path.join(args.dataset_dir, scene_name))
-        for c in channels: c.clear()
+        loader.sync_size()
+        loader.save(os.path.join(args.dataset_dir, scene_name))
+        loader.clear()
 
     # Remove after processed
     cmd = "rm -rf " + os.path.join(args.decompress_dir, scene_name)
