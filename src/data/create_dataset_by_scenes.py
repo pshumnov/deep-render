@@ -41,7 +41,6 @@ for i in range(args.first, args.last + 1):
         load_scene(loader, os.path.join(decompress_dir, scene_name), args.max_frames)
     
     if (i + 1) % args.buffer_size == 0:
-        loader.sync_size()
         loader.save(os.path.join(dataset_dir, scene_name))
         loader.clear()
 
