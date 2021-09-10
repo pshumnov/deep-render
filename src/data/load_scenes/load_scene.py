@@ -15,15 +15,17 @@ def load_scene(loader, scenepath, frames_qty=None):
         total = frames_qty
 
     loader.extend(total)
-    print(total, frames_qty)
+    old_size = loader.size()
     
     bar = IncrementalBar('Processing scene', max=total)
 
     for cam in range(cams):
-        left = min(total - loader.size(), frames[cam].shape[0])
+        size = loader.size() - old_size
+        left = min(total - size, frames[cam].shape[0])
+
         load_camera(loader, scenepath, cam, frames[cam], bar, left)
 
-        if loader.size() >= total:
+        if size >= total:
             break
 
     bar.finish()
