@@ -38,6 +38,8 @@ class Depth512Loader(BaseChannelLoader):
         arr = skimage.measure.block_reduce(arr, (2, 2, 1), np.min)
         arr /= np.amax(arr)
 
+        arr = arr * 2 - 1
+
         return arr
 
 
