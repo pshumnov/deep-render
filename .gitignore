@@ -1,5 +1,6 @@
 channels_examples/
-
+checkpoints/
+logs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
