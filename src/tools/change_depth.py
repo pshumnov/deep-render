@@ -2,7 +2,7 @@ import numpy as np
 import h5py
 
 def open_dataset(filename):
-    f = h5py.File("/raid/shumnov/hypersim/dataset/" + filename + ".hdf5", "r")
+    f = h5py.File(filename, "r")
 
     color = f["color"][()]
     albedo = f["diffuse_reflectance"][()]
@@ -13,7 +13,18 @@ def open_dataset(filename):
     
     return color, albedo, depth, normals
 
-fnames = ["ai_016_002"]
+fnames = ["ai_001_010", 
+          "ai_004_001", 
+          "ai_006_002", 
+          "ai_008_004", 
+          "ai_010_005", 
+          "ai_013_001", 
+          "ai_002_010", 
+          "ai_005_001", 
+          "ai_007_004", 
+          "ai_009_004", 
+          "ai_011_007", 
+          "ai_015_001"]
 
 for fname in fnames:
     color, albedo, depth, normals = open_dataset("/raid/shumnov/hypersim/dataset/" + fname + ".hdf5")
