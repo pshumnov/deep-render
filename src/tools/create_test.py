@@ -18,10 +18,10 @@ def delete(indexes):
     depth = np.delete(depth, indexes, axis=0)
     normals = np.delete(normals, indexes, axis=0)
 
-delete(range(99, 184))
-delete(range(195, 204))
-delete(range(206, 386))
 delete(548)
+delete(range(206, 386))
+delete(range(195, 204))
+delete(range(99, 184))
 
 with h5py.File("/raid/shumnov/hypersim/dataset/test.hdf5", "w") as f:
     f.create_dataset("color", data=color, compression='gzip')

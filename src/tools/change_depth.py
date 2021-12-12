@@ -36,3 +36,5 @@ for fname in fnames:
         f.create_dataset("diffuse_reflectance", data=albedo, compression='gzip')
         f.create_dataset("depth_meters", data=depth, compression='gzip')
         f.create_dataset("normal_bump_cam", data=normals, compression='gzip')
+
+    print(fname)
