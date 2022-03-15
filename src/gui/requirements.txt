@@ -1,0 +1,6 @@
+PyQt5
+pillow
+scikit-image
+numpy
+h5py
+tensorflow
