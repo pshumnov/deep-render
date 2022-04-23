@@ -1,8 +1,3 @@
-<img src="https://github.com/MrShumnov/deep-render/blob/master/examples/results/01_res_true.png" alt="drawing" width="512"/>
-<img src="https://github.com/MrShumnov/deep-render/blob/master/examples/results/02_res_true.png" alt="drawing" width="512"/>
-<img src="https://github.com/MrShumnov/deep-render/blob/master/examples/results/08_res_true.png" alt="drawing" width="512"/>
-<img src="https://github.com/MrShumnov/deep-render/blob/master/examples/results/09_res_true.png" alt="drawing" width="512"/>
-<img src="https://github.com/MrShumnov/deep-render/blob/master/examples/results/03_res_true.png" alt="drawing" width="512"/>
-<img src="https://github.com/MrShumnov/deep-render/blob/master/examples/results/04_res_true.png" alt="drawing" width="512"/>
-<img src="https://github.com/MrShumnov/deep-render/blob/master/examples/results/05_res_true.png" alt="drawing" width="512"/>
-<img src="https://github.com/MrShumnov/deep-render/blob/master/examples/results/06_res_true.png" alt="drawing" width="512"/>
+<img src="https://github.com/MrShumnov/deep-render/blob/master/examples/results/01_res_true.png" alt="drawing" width="256"/> <img src="https://github.com/MrShumnov/deep-render/blob/master/examples/results/08_res_true.png" alt="drawing" width="256"/> <img src="https://github.com/MrShumnov/deep-render/blob/master/examples/results/03_res_true.png" alt="drawing" width="256"/> 
+
+<img src="https://github.com/MrShumnov/deep-render/blob/master/examples/results/02_res_true.png" alt="drawing" width="256"/> <img src="https://github.com/MrShumnov/deep-render/blob/master/examples/results/09_res_true.png" alt="drawing" width="256"/> <img src="https://github.com/MrShumnov/deep-render/blob/master/examples/results/04_res_true.png" alt="drawing" width="256"/>
